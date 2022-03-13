@@ -62,8 +62,14 @@ location {{ .Path }} {
 		uwsgi_pass {{ trim .Proto }}://{{ trim .Upstream }};
 	{{ else if eq .Proto "fastcgi" }}
 		root   {{ trim .VhostRoot }};
-		include fastcgi_params;
+		try_files $uri /index.php =404;
+        fastcgi_index index.php;
+        fastcgi_buffers 16 16k;
+        fastcgi_buffer_size 32k;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 		fastcgi_pass {{ trim .Upstream }};
+		# fastcgi_pass php-test:9000;
+		include fastcgi_params;
 	{{ else if eq .Proto "grpc" }}
 		grpc_pass {{ trim .Proto }}://{{ trim .Upstream }};
 	{{ else }}
@@ -118,7 +124,7 @@ location {{ .Path }} {
                         {{ else if $containerNetwork }}
                             {{ $server_found = "true" }}
         # {{ $container.Name }}
-        server {{ $containerNetwork.IP }}:{{ $address.Port }};
+        server {{ $container.Name }}:{{ $address.Port }};
                         {{ end }}
                     {{ else if $containerNetwork }}
         # {{ $container.Name }}

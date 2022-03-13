@@ -1,0 +1,23 @@
+version: '3.6'
+
+services:
+
+  php-fpm:
+    build:
+      context: ./
+      dockerfile: ../../php/Dockerfile.php74
+    image: lemp/phpfpm
+    container_name: php-fpm
+    restart: always
+    volumes:
+      - ./:/var/www/public/dev.localhost # if you use php, location fdirectory is required {dev.localhost} <- change this same as with your domain 
+      - ../../php/config/php.ini:/usr/local/etc/php/php.ini
+    env_file:
+      - .env
+    expose:
+      - 80
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
