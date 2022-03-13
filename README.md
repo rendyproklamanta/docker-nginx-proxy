@@ -27,7 +27,7 @@ VIRTUAL_PORT=3000+ <- For JS
 VIRTUAL_PORT=9000 <- For PHP-FPM
 ```
 
-If Runing HTML This Variable is required :
+If Runing **HTML** This Variable is required :
 
 ```
 DOMAIN=localhost
@@ -36,16 +36,14 @@ VIRTUAL_HOST=${DOMAIN}
 
 ```
 
-If Runing JS This Variable is required :
+If Runing **JS** This Variable is required :
 
 ```
 PORT=3000 / 3001 / 3002
 VIRTUAL_PORT=${PORT}
 ```
 
-<br>
-
-If Runing PHP This Variable is required :
+If Runing **PHP** This Variable is required :
 
 ```
 DOMAIN=php.localhost
@@ -66,14 +64,14 @@ LETSENCRYPT_EMAIL=webmaster@${DOMAIN}
 
 - Edit **/domain.com/docker-compose.yml** file
 
-If you running HTML change volumes with this :
+If you running **HTML** change volumes with this :
 
 ```
 volumes:
     - ./:/usr/share/nginx/html
 ```
 
-If you running JS change volumes with this :
+If you running **JS** change volumes with this :
 
 ```
 volumes:
@@ -81,14 +79,14 @@ volumes:
     - /app/node_modules
 ```
 
-If you running PHP change volumes with this :
+If you running **PHP** change volumes with this :
 
 ```
 volumes:
     - ./:/var/www/public/dev.localhost
 ```
 
-> PS: change **dev.localhost** with your **VIRTUAL_ROOT** in .env file
+> Ps : change **dev.localhost** with your **VIRTUAL_ROOT** in .env file
 
 <br>
 
